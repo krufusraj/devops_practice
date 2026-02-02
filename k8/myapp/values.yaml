@@ -1,0 +1,6 @@
+appName: myapp
+namespace: default
+image:
+  name: myapp-jenkins
+  tag: latest
+   

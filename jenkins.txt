@@ -1,0 +1,52 @@
+pipeline {
+    agent any
+
+    environment {
+        // Defining a virtual environment path
+        VENV = ".venv"
+    }
+
+    stages {
+        stage('Checkout') {
+            steps {
+                // Replace this with your specific repo URL
+                git branch: 'master', 
+                    url: 'https://github.com/krufusraj/devops_practice'
+            }
+        }
+        
+        stage('List'){
+            steps{
+                sh 'ls'
+            }
+        }
+        
+        stage('Setup') {
+            steps {
+                sh """
+                python3 -m venv $VENV
+                $VENV/bin/pip install --upgrade pip
+                """
+            }
+        }
+
+        stage('Build & Install') {
+            steps {
+                // Install dependencies from your requirements.txt
+                sh "$VENV/bin/pip install -r requirments.txt"
+            }
+        }
+        stage('Docker Build') {
+            steps {
+                sh "docker build -t myapp-jenkins:latest ."
+            }
+        }
+    }
+
+    post {
+        always {
+            // Clean up the virtual environment to save disk space
+            sh "rm -rf $VENV"
+        }
+    }
+}
