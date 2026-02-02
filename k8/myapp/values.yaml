@@ -1,6 +1,6 @@
 appName: myapp
 namespace: default
 image:
-  name: myapp-jenkins
-  tag: 1.0
+  name: docker.io/library/myapp-jenkins
+  tag: 1.0.16
    
