@@ -18,7 +18,6 @@ spec:
       containers:
       - name: mycontainer
         image: "{{ .Values.image.name}}:{{ .Values.image.tag}}"
-        command: ["sh", "-c", "echo 'Hello World'; tail -f /dev/null"]
         ports:
         - containerPort: 5000
                 
